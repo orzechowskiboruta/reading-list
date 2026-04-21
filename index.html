@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading List · iSIH Polska</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --bg-warm: #f4efe6;
+    --surface: #ffffff;
+    --surface-hover: #fdfcf9;
+    --ink: #0a0a0a;
+    --ink-2: #3a3a3a;
+    --ink-3: #6b6b6b;
+    --ink-4: #a8a8a8;
+    --border: #ebe6db;
+    --border-strong: #d6cfbf;
+    --accent: #1f5f4a;
+    --accent-soft: #e6f0ed;
+    --amber: #c2754a;
+    --amber-soft: #faeadd;
+    --coral: #b8482f;
+    --coral-soft: #fae6df;
+    --sky: #2c5c7a;
+    --sky-soft: #e0ecf2;
+    --shadow-sm: 0 1px 2px rgba(10,10,10,0.04);
+    --shadow: 0 2px 8px rgba(10,10,10,0.06), 0 1px 2px rgba(10,10,10,0.04);
+    --shadow-lg: 0 20px 50px rgba(10,10,10,0.12), 0 8px 16px rgba(10,10,10,0.06);
+    --radius: 14px;
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Geist', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  /* subtle gradient wash */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(1200px circle at 10% 0%, rgba(230,240,237,0.5), transparent 60%),
+      radial-gradient(800px circle at 90% 20%, rgba(250,234,221,0.4), transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    padding: 56px 0 20px;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .brand-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  .updated {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(44px, 7vw, 92px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 20px;
+    font-feature-settings: 'ss01';
+  }
+
+  h1 em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .lead {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 620px;
+    font-weight: 350;
+  }
+
+  /* ============ STATS ============ */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 48px;
+  }
+
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+  }
+
+  .stat.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  .stat.active .stat-label { color: rgba(250,248,243,0.7); }
+  .stat.active .stat-value { color: var(--bg); }
+  .stat.active .stat-bar { background: rgba(250,248,243,0.25); }
+  .stat.active .stat-bar-fill { background: var(--bg); }
+
+  .stat-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+
+  .stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-feature-settings: 'ss01';
+  }
+
+  .stat-sub {
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+
+  .stat-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--bg-warm);
+  }
+
+  .stat-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ============ CONTROL BAR ============ */
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(250,248,243,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 20px 0;
+    margin: 48px -28px 36px;
+    padding-left: 28px;
+    padding-right: 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 260px;
+    max-width: 480px;
+    position: relative;
+  }
+
+  .search-box input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 12px 44px 12px 44px;
+    font-family: 'Geist', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .search-box input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  .search-box::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+  }
+
+  .search-clear {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--bg-warm);
+    border: none;
+    cursor: pointer;
+    color: var(--ink-3);
+    font-size: 14px;
+    line-height: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-clear.visible { display: flex; }
+  .search-clear:hover { background: var(--border-strong); color: var(--ink); }
+
+  .filter-group {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover { color: var(--ink); }
+
+  .filter-btn.active {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .count-pill {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 7px;
+    background: var(--bg-warm);
+    color: var(--ink-3);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .filter-btn.active .count-pill {
+    background: rgba(250,248,243,0.2);
+    color: rgba(250,248,243,0.85);
+  }
+
+  .platform-pills {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .platform-pill {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 100px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .platform-pill:hover {
+    border-color: var(--ink-3);
+  }
+
+  .platform-pill.active {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  /* ============ SECTION ============ */
+  .section {
+    margin-bottom: 64px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 350;
+  }
+
+  .section-count {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.1em;
+  }
+
+  .section.uncertain .section-title em { color: var(--amber); }
+  .section.not .section-title em { color: var(--coral); }
+
+  /* ============ GRID ============ */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  /* ============ BOOK CARD ============ */
+  .book {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.4s ease-out backwards;
+    position: relative;
+  }
+
+  .book.hidden { display: none; }
+
+  .book:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .book:hover .cover-img { transform: scale(1.02); }
+
+  /* Cover container */
+  .cover {
+    aspect-ratio: 3 / 4;
+    background: var(--bg-warm);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .cover-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(145deg, var(--bg-warm) 0%, #e8e0d0 100%);
+  }
+
+  .cover-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .cover-ph-author {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 12px;
+  }
+
+  .cover-ph-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink-2);
+  }
+
+  .cover-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-warm);
+  }
+
+  .cover-loading::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--border-strong);
+    border-top-color: var(--ink-3);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  /* Status chip overlay */
+  .status-chip {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    z-index: 2;
+  }
+
+  .status-chip.translated { color: var(--accent); }
+  .status-chip.uncertain { color: var(--amber); }
+  .status-chip.not { color: var(--coral); }
+
+  /* Card body */
+  .book-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .book-author {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .book-title {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    font-feature-settings: 'ss01';
+  }
+
+  .book-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .book-subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.3;
+    font-weight: 350;
+  }
+
+  .not-translated .book-title {
+    color: var(--ink-3);
+    font-style: italic;
+    font-weight: 350;
+  }
+
+  .book-meta {
+    margin-top: auto;
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .book-price {
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .book-price-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 400;
+    margin-right: 4px;
+  }
+
+  .platform-dots {
+    display: flex;
+    gap: 3px;
+  }
+
+  .platform-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .pd-legimi { background: #0c5fe3; }
+  .pd-empik { background: #e11837; }
+  .pd-default { background: var(--ink-3); }
+
+  /* ============ MODAL ============ */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    max-width: 840px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+    transition: all 0.25s cubic-bezier(.4,0,.2,1);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+  }
+
+  .modal-backdrop.open .modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    z-index: 3;
+    font-size: 16px;
+    color: var(--ink-2);
+  }
+
+  .modal-close:hover {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  .modal-header {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 36px;
+    padding: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modal-cover {
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    background: var(--bg-warm);
+  }
+
+  .modal-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-info { padding-right: 20px; }
+
+  .modal-author {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+
+  .modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+    font-feature-settings: 'ss01';
+  }
+
+  .modal-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .modal-subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-3);
+    margin-bottom: 20px;
+    font-weight: 350;
+  }
+
+  .modal-status-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .chip-translated { background: var(--accent-soft); color: var(--accent); }
+  .chip-uncertain { background: var(--amber-soft); color: var(--amber); }
+  .chip-not { background: var(--coral-soft); color: var(--coral); }
+  .chip-publisher { background: var(--bg-warm); color: var(--ink-2); }
+  .chip-publisher::before { content: '◈'; font-size: 9px; }
+  .chip-translated::before { content: '●'; }
+  .chip-uncertain::before { content: '◐'; }
+  .chip-not::before { content: '○'; }
+
+  .modal-note {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    padding: 16px 20px;
+    background: var(--bg-warm);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--accent);
+  }
+
+  .modal-body { padding: 32px 36px; }
+
+  .modal-section {
+    margin-bottom: 32px;
+  }
+
+  .modal-section:last-child { margin-bottom: 0; }
+
+  .modal-section-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+
+  .modal-prices {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .modal-price {
+    background: var(--surface);
+    padding: 16px 18px;
+  }
+
+  .modal-price-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+
+  .modal-price-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .buy-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+
+  .buy-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--ink);
+    font-family: 'Geist', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+
+  .buy-link:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .buy-link:hover .buy-arrow { transform: translate(2px, -2px); }
+
+  .buy-link-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .buy-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .buy-arrow {
+    font-family: 'Geist', sans-serif;
+    font-size: 14px;
+    transition: transform 0.2s;
+    color: var(--ink-3);
+  }
+
+  .buy-link:hover .buy-arrow { color: var(--bg); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin: 80px 0 60px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-main {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+
+  .footer-main em {
+    font-style: normal;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .footer-pricing {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+
+  .footer-pricing-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .pricing-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pricing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border);
+    font-size: 13px;
+  }
+
+  .pricing-row:last-child { border-bottom: none; }
+
+  .pr-name {
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+
+  .pr-price {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .pr-note {
+    font-size: 11px;
+    color: var(--ink-3);
+    display: block;
+    font-family: 'Geist', sans-serif;
+    font-weight: 400;
+  }
+
+  /* ============ NO RESULTS ============ */
+  .empty {
+    grid-column: 1 / -1;
+    padding: 80px 20px;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-3);
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .modal-header { grid-template-columns: 1fr; gap: 20px; padding: 28px; }
+    .modal-cover { max-width: 200px; margin: 0 auto; }
+    footer { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    header { padding: 36px 0 16px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .controls { padding: 14px 20px; margin: 32px -20px 28px; }
+    .filter-group { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .book-title { font-size: 15px; }
+    .book-body { padding: 12px; }
+    .modal-body { padding: 24px; }
+    .modal-title { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="brand-row">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>iSIH · Reading List PL</span>
+      </div>
+      <div class="updated">zaktualizowano 20.04.2026</div>
+    </div>
+
+    <h1>Lista lektur, <em>polskie tropy</em></h1>
+    <p class="lead">Dashboard dostępności polskich tłumaczeń książek z sugerowanej listy International School of Intuition &amp; Healing. Kliknij w okładkę, żeby zobaczyć gdzie kupić i za ile.</p>
+
+    <div class="stats">
+      <div class="stat" data-filter="all">
+        <div class="stat-label">Wszystkie tytuły</div>
+        <div class="stat-value">50</div>
+        <div class="stat-sub">na liście iSIH</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="stat" data-filter="translated">
+        <div class="stat-label">Po polsku</div>
+        <div class="stat-value">19</div>
+        <div class="stat-sub">38% listy</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:38%"></div></div>
+      </div>
+      <div class="stat" data-filter="uncertain">
+        <div class="stat-label">Do weryfikacji</div>
+        <div class="stat-value">10</div>
+        <div class="stat-sub">niepotwierdzone</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:20%; background:var(--amber)"></div></div>
+      </div>
+      <div class="stat" data-filter="not">
+        <div class="stat-label">Tylko po angielsku</div>
+        <div class="stat-value">21</div>
+        <div class="stat-sub">42% listy</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:42%; background:var(--coral)"></div></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="search-box">
+      <input type="text" id="search" placeholder="szukaj po autorze lub tytule…" autocomplete="off">
+      <button class="search-clear" id="search-clear" type="button">✕</button>
+    </div>
+
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">Wszystkie<span class="count-pill">50</span></button>
+      <button class="filter-btn" data-filter="translated">Po polsku<span class="count-pill">19</span></button>
+      <button class="filter-btn" data-filter="uncertain">Niepewne<span class="count-pill">10</span></button>
+      <button class="filter-btn" data-filter="not">EN only<span class="count-pill">21</span></button>
+    </div>
+
+    <div class="platform-pills">
+      <span class="platform-pill" data-platform="legimi">Legimi</span>
+      <span class="platform-pill" data-platform="empik">Empik</span>
+      <span class="platform-pill" data-platform="ebook">Ebook</span>
+      <span class="platform-pill" data-platform="audiobook">Audiobook</span>
+    </div>
+  </div>
+
+  <div id="sections">
+    <!-- dynamically rendered -->
+  </div>
+
+  <footer>
+    <div class="footer-main">
+      Dane zebrane z: <em>Legimi</em>, <em>Empik</em>, <em>TaniaKsiazka</em>, <em>Znak</em>, <em>Ebookpoint</em>, <em>Woblink</em>, <em>Tezeusz</em>, <em>Księgarnia Relaksacyjna</em>, <em>Lubimyczytać</em>, <em>Amazon.pl</em> oraz stron wydawców. Okładki ładowane dynamicznie z Google Books API.
+      <br><br>
+      Ceny są orientacyjne — sprawdzaj aktualne ceny i dostępność bezpośrednio w księgarniach. Linki do zakupu otwierają wyszukiwarkę na danej platformie z tytułem książki.
+    </div>
+
+    <div class="footer-pricing">
+      <div class="footer-pricing-title">Koszty <em style="color:var(--accent); font-style:italic;">dostępu</em></div>
+      <div class="pricing-rows">
+        <div class="pricing-row">
+          <div class="pr-name">Legimi Podstawowy<span class="pr-note">11 tytułów z listy · ebooki bez limitu</span></div>
+          <div class="pr-price">39,99 zł</div>
+        </div>
+        <div class="pricing-row">
+          <div class="pr-name">Legimi Premium<span class="pr-note">+ audiobooki bez limitu</span></div>
+          <div class="pr-price">54,99 zł</div>
+        </div>
+        <div class="pricing-row">
+          <div class="pr-name">Empik Premium<span class="pr-note">darmowa dostawa + 10% rabatu</span></div>
+          <div class="pr-price">9,99 zł</div>
+        </div>
+        <div class="pricing-row">
+          <div class="pr-name">Ebook pojedynczy<span class="pr-note">Empik, Woblink, Virtualo</span></div>
+          <div class="pr-price">18–42 zł</div>
+        </div>
+        <div class="pricing-row">
+          <div class="pr-name">Książka papierowa<span class="pr-note">nowa, używane od 8 zł</span></div>
+          <div class="pr-price">28–65 zł</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="Zamknij">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+// =================== DATA ===================
+const books = [
+  // TRANSLATED
+  {
+    id: 'coelho-alchemist',
+    author: 'Paulo Coelho',
+    titleEn: 'The Alchemist',
+    titlePl: 'Alchemik',
+    status: 'translated',
+    publisher: 'Drzewo Babel',
+    year: 1993,
+    searchQuery: 'Alchemik Paulo Coelho',
+    isbn: '9788389928139',
+    platforms: ['legimi','empik','taniaksiazka','swiatksiazki'],
+    prices: [
+      { label: 'Ebook', value: '19 zł' },
+      { label: 'Papier', value: '32 zł' },
+      { label: 'Audiobook', value: '29 zł' }
+    ],
+    note: 'Dostępne w kilku wydaniach — ilustrowane, kieszonkowe, z barwionymi brzegami.'
+  },
+  {
+    id: 'tolle-power',
+    author: 'Eckhart Tolle',
+    titleEn: 'The Power of Now',
+    titlePl: 'Potęga teraźniejszości',
+    status: 'translated',
+    publisher: 'Galaktyka',
+    searchQuery: 'Potęga teraźniejszości Tolle',
+    isbn: '9788375792522',
+    platforms: ['legimi','empik','woblink','ebookpoint'],
+    prices: [
+      { label: 'Ebook', value: '32 zł' },
+      { label: 'Papier', value: '39 zł' },
+      { label: 'Audiobook', value: '35 zł' }
+    ]
+  },
+  {
+    id: 'gibran-prophet',
+    author: 'Kahlil Gibran',
+    titleEn: 'The Prophet',
+    titlePl: 'Prorok',
+    status: 'translated',
+    publisher: 'PETRUS / PWN',
+    searchQuery: 'Prorok Kahlil Gibran',
+    platforms: ['legimi','empik','pwn'],
+    prices: [
+      { label: 'Ebook', value: '20 zł' },
+      { label: 'Papier', value: '28 zł' }
+    ],
+    note: 'Ponad 7 polskich przekładów. Najpopularniejszy — autorstwa Ernesta Brylla.'
+  },
+  {
+    id: 'weiss-many',
+    author: 'Dr. Brian Weiss',
+    titleEn: 'Many Lives, Many Masters',
+    titlePl: 'Wiele wcieleń, wielu mistrzów',
+    status: 'translated',
+    publisher: 'Limbus',
+    searchQuery: 'Brian Weiss wcieleń mistrzów',
+    platforms: ['legimi','empik','taniaksiazka'],
+    prices: [
+      { label: 'Ebook', value: '28 zł' },
+      { label: 'Papier', value: '39 zł' }
+    ]
+  },
+  {
+    id: 'chopra-quantum',
+    author: 'Deepak Chopra',
+    titleEn: 'Quantum Healing',
+    titlePl: 'Zdrowie bez granic',
+    status: 'translated',
+    publisher: 'Limbus',
+    year: 2000,
+    searchQuery: 'Zdrowie bez granic Chopra',
+    platforms: ['relaksacyjna','tezeusz'],
+    prices: [{ label: 'Papier', value: '26 zł' }],
+    note: 'Starsze wydanie — obecnie rzadsze. Również „Życie bez starości" (1995) w antykwariatach.'
+  },
+  {
+    id: 'myss-anatomy',
+    author: 'Caroline Myss',
+    titleEn: 'Anatomy of the Spirit',
+    titlePl: 'Anatomia duszy',
+    status: 'translated',
+    publisher: 'Medium',
+    searchQuery: 'Anatomia duszy Caroline Myss',
+    isbn: '9788387025496',
+    platforms: ['legimi','empik','znak','medium'],
+    prices: [
+      { label: 'Ebook', value: '24 zł' },
+      { label: 'Papier', value: '29 zł' }
+    ]
+  },
+  {
+    id: 'myss-sacred',
+    author: 'Caroline Myss',
+    titleEn: 'Sacred Contracts',
+    titlePl: 'Życie jako Święty Kontrakt',
+    status: 'translated',
+    publisher: 'Medium',
+    searchQuery: 'Życie jako Święty Kontrakt Myss',
+    platforms: ['medium','znak'],
+    prices: [{ label: 'Papier', value: '42 zł' }]
+  },
+  {
+    id: 'capra-tao',
+    author: 'Fritjof Capra',
+    titleEn: 'The Tao of Physics',
+    titlePl: 'Tao fizyki',
+    status: 'translated',
+    publisher: 'Rebis',
+    searchQuery: 'Tao fizyki Capra',
+    isbn: '9788371208294',
+    platforms: ['empik','znak','taniaksiazka'],
+    prices: [{ label: 'Papier', value: '42 zł' }],
+    note: 'Nowe wydanie oparte na 5. edycji amerykańskiej z okazji 35. rocznicy.'
+  },
+  {
+    id: 'jeffers-fear',
+    author: 'Susan Jeffers',
+    titleEn: 'Feel The Fear And Do It Anyway',
+    titlePl: 'Nie bój się bać',
+    status: 'translated',
+    publisher: 'Akuracik',
+    searchQuery: 'Nie bój się bać Jeffers',
+    platforms: ['empik','ceneo','tezeusz'],
+    prices: [{ label: 'Papier', value: '25 zł' }],
+    note: 'Brak na Legimi. Ponownie w druku od 2019 r.'
+  },
+  {
+    id: 'walsch-god',
+    author: 'Neale Donald Walsch',
+    titleEn: 'Conversations With God (Books 1–4)',
+    titlePl: 'Rozmowy z Bogiem (Księgi 1–4)',
+    status: 'translated',
+    publisher: 'Limbus',
+    searchQuery: 'Rozmowy z Bogiem Walsch',
+    platforms: ['legimi','empik'],
+    prices: [
+      { label: 'Ebook/tom', value: '22 zł' },
+      { label: 'Pakiet 4×', value: '78 zł' }
+    ],
+    note: 'Wszystkie 4 tomy dostępne na Legimi jako ebooki. Tom 4 ukazał się w 2022 r.'
+  },
+  {
+    id: 'emoto-water',
+    author: 'Masaru Emoto',
+    titleEn: 'Messages From Water',
+    titlePl: 'Tajemnice wody i jej wpływ…',
+    status: 'translated',
+    publisher: 'Medium',
+    searchQuery: 'Tajemnice wody Emoto',
+    platforms: ['empik','taniaksiazka','tezeusz'],
+    prices: [{ label: 'Papier', value: '39 zł' }]
+  },
+  {
+    id: 'kabat-wherever',
+    author: 'Jon Kabat-Zinn',
+    titleEn: 'Wherever You Go, There You Are',
+    titlePl: 'Gdziekolwiek jesteś, bądź',
+    status: 'translated',
+    publisher: 'Czarna Owca',
+    searchQuery: 'Gdziekolwiek jesteś bądź Kabat-Zinn',
+    platforms: ['legimi','empik','sensus','ebookpoint'],
+    prices: [
+      { label: 'Ebook', value: '25 zł' },
+      { label: 'Papier', value: '39 zł' },
+      { label: 'Audiobook', value: '32 zł' }
+    ],
+    note: 'Jubileuszowe wydanie (2023) z nowym wstępem i posłowiem autora.'
+  },
+  {
+    id: 'brennan-hands',
+    author: 'Barbara Ann Brennan',
+    titleEn: 'Hands of Light',
+    titlePl: 'Dłonie pełne światła',
+    status: 'translated',
+    publisher: 'Amber',
+    searchQuery: 'Dłonie pełne światła Brennan',
+    isbn: '9788324184972',
+    platforms: ['legimi','empik','znak','virtualo'],
+    prices: [
+      { label: 'Ebook', value: '32 zł' },
+      { label: 'Papier', value: '59 zł' }
+    ],
+    note: 'Najważniejszy podręcznik bioenergoterapii, ponad milion egzemplarzy na świecie.'
+  },
+  {
+    id: 'brennan-light',
+    author: 'Barbara Ann Brennan',
+    titleEn: 'Light Emerging',
+    titlePl: 'Światło życia',
+    status: 'translated',
+    publisher: 'Amber',
+    searchQuery: 'Światło życia Brennan',
+    platforms: ['empik','znak','amber'],
+    prices: [{ label: 'Papier', value: '55 zł' }]
+  },
+  {
+    id: 'mctaggart-field',
+    author: 'Lynne McTaggart',
+    titleEn: 'The Field',
+    titlePl: 'Pole',
+    status: 'translated',
+    publisher: 'Czarna Owca',
+    year: 2024,
+    searchQuery: 'Pole McTaggart tajemnicza siła',
+    platforms: ['empik','znak','bonito'],
+    prices: [{ label: 'Papier', value: '45 zł' }],
+    note: 'Nowe wydanie z 2024 r. — wcześniej trudne do zdobycia.'
+  },
+  {
+    id: 'dalailama-heart',
+    author: 'Dalajlama',
+    titleEn: 'An Open Heart',
+    titlePl: 'Otwarte serce',
+    status: 'translated',
+    searchQuery: 'Otwarte serce Dalajlama współczucie',
+    platforms: ['nakanapie','tezeusz'],
+    prices: [{ label: 'Używana', value: '15–35 zł' }],
+    note: 'Głównie antykwariaty — trudne do zdobycia w nowym wydaniu.'
+  },
+  {
+    id: 'judith-wheels',
+    author: 'Anodea Judith',
+    titleEn: 'Wheels Of Life',
+    titlePl: 'Biblia czakr (Koła życia)',
+    status: 'translated',
+    publisher: 'Czerwony Słoń',
+    year: 2022,
+    searchQuery: 'Biblia czakr Anodea Judith',
+    platforms: ['relaksacyjna','empik','taniaksiazka'],
+    prices: [
+      { label: 'Papier', value: '52 zł' },
+      { label: 'Ebook', value: '34 zł' }
+    ],
+    note: 'Nowe wydanie z 2022 r. pod tytułem „Biblia czakr".'
+  },
+  {
+    id: 'zukav-wu-li',
+    author: 'Gary Zukav',
+    titleEn: 'The Dancing Wu Li Masters',
+    titlePl: 'Tańczący Mistrzowie Wu Li',
+    status: 'translated',
+    publisher: 'Wydawnictwo Kobiece',
+    searchQuery: 'Tańczący Mistrzowie Wu Li Zukav',
+    platforms: ['empik','znak','taniaksiazka'],
+    prices: [{ label: 'Papier', value: '40 zł' }]
+  },
+  {
+    id: 'ingerman-soul',
+    author: 'Sandra Ingerman',
+    titleEn: 'Soul Retrieval',
+    titlePl: 'Odzyskiwanie duszy',
+    status: 'translated',
+    publisher: 'New Space',
+    searchQuery: 'Odzyskiwanie duszy Ingerman',
+    platforms: ['empik','amazonpl','znak','pwn'],
+    prices: [{ label: 'Papier', value: '44 zł' }],
+    note: 'Czytelnicy krytykują jakość tłumaczenia — warto sprawdzić fragment przed zakupem.'
+  },
+
+  // UNCERTAIN
+  {
+    id: 'bailey-ponder',
+    author: 'Alice Bailey',
+    titleEn: 'Ponder On This',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Ponder On This Alice Bailey',
+    note: 'Klasyk teozoficzny. Fragmenty mogą być w polskich publikacjach teozoficznych, ale pełne wydanie nieznalezione.'
+  },
+  {
+    id: 'cooper-light',
+    author: 'Diana Cooper',
+    titleEn: 'A Little Light On The Spiritual Laws',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Diana Cooper A Little Light',
+    note: 'Inne tytuły Cooper tłumaczono, tego konkretnie nie udało się potwierdzić.'
+  },
+  {
+    id: 'hamilton-thought',
+    author: 'David Hamilton',
+    titleEn: "It's The Thought That Counts",
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: "It's The Thought That Counts David Hamilton",
+    note: 'Niektóre książki Hamiltona wydano po polsku — ta wymaga weryfikacji.'
+  },
+  {
+    id: 'judith-eastern',
+    author: 'Anodea Judith',
+    titleEn: 'Eastern Body Western Mind',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Eastern Body Western Mind Anodea Judith',
+    note: 'Autorka jest tłumaczona („Koła życia"), ale tego tytułu nie potwierdziłem.'
+  },
+  {
+    id: 'dk-body',
+    author: 'Dorling Kindersley',
+    titleEn: 'Human Body',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Human Body Dorling Kindersley',
+    note: 'DK ma wiele polskich wydań (Arkady). Bardzo prawdopodobne — nie potwierdziłem konkretnie.'
+  },
+  {
+    id: 'krystal-ties',
+    author: 'Phyllis Krystal',
+    titleEn: 'Cutting the Ties That Bind',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Cutting the Ties That Bind Krystal',
+    note: 'Wymaga weryfikacji w polskich księgarniach ezoterycznych.'
+  },
+  {
+    id: 'page-frontiers',
+    author: 'Dr. Christine Page',
+    titleEn: 'Frontiers of Health',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Frontiers of Health Christine Page',
+    note: 'Niepotwierdzone. Autorka mało znana w Polsce.'
+  },
+  {
+    id: 'rowe-depression',
+    author: 'Dorothy Rowe',
+    titleEn: 'Depression: The Way Out of Your Prison',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Depression Way Out Prison Dorothy Rowe',
+    note: 'Rowe jest uznanym psychologiem — prawdopodobne tłumaczenie, ale niepotwierdzone.'
+  },
+  {
+    id: 'shapiro-body',
+    author: 'Deb Shapiro',
+    titleEn: 'Your Body Speaks Your Mind',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Your Body Speaks Your Mind Shapiro',
+    note: 'Wymaga weryfikacji.'
+  },
+  {
+    id: 'white-chakras',
+    author: 'Ruth White',
+    titleEn: 'Working With Your Chakras',
+    titlePl: null,
+    status: 'uncertain',
+    searchQuery: 'Working With Your Chakras Ruth White',
+    note: 'Wymaga weryfikacji w wydawnictwach tematycznych.'
+  },
+
+  // NOT TRANSLATED
+  {
+    id: 'allen-spirit',
+    author: 'Sue Allen',
+    titleEn: 'Spirit Release: A Practical Handbook',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Spirit Release Practical Handbook Sue Allen',
+    platforms: ['bookcity','amazonpl'],
+    prices: [{ label: 'EN papier', value: '~90 zł' }]
+  },
+  {
+    id: 'altman-body',
+    author: 'Jen Altman',
+    titleEn: 'Body Journeys (CDs)',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Body Journeys Jen Altman',
+    note: 'Seria CD — niedostępna w języku polskim.'
+  },
+  {
+    id: 'angelo-healing',
+    author: 'Jack Angelo',
+    titleEn: 'Your Healing Power',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Your Healing Power Jack Angelo',
+    platforms: ['bookcity'],
+    prices: [{ label: 'EN import', value: '~85 zł' }]
+  },
+  {
+    id: 'baldwin-souls',
+    author: 'William Baldwin',
+    titleEn: 'Healing Lost Souls',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Healing Lost Souls William Baldwin',
+    platforms: ['amazonpl'],
+    prices: [{ label: 'EN import', value: '~120 zł' }]
+  },
+  {
+    id: 'chouza-cancer',
+    author: 'Regina Chouza',
+    titleEn: 'A Personal Guide to Self-Healing, Cancer & Love',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Regina Chouza Self-Healing Cancer Love',
+    platforms: ['amazonpl'],
+    prices: [{ label: 'EN', value: '~75 zł' }]
+  },
+  {
+    id: 'church-genes',
+    author: 'Dawson Church',
+    titleEn: 'The Genie in Your Genes',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'The Genie in Your Genes Dawson Church',
+    platforms: ['amazonpl'],
+    prices: [{ label: 'EN', value: '~95 zł' }]
+  },
+  {
+    id: 'fiore-dead',
+    author: 'Dr. Edith Fiore',
+    titleEn: 'The Unquiet Dead',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'The Unquiet Dead Edith Fiore',
+    platforms: ['amazonpl'],
+    prices: [{ label: 'EN', value: '~80 zł' }]
+  },
+  {
+    id: 'hall-protection',
+    author: 'Judy Hall',
+    titleEn: 'Thorsons Way of Psychic Protection',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Thorsons Way Psychic Protection Judy Hall',
+    platforms: ['bookcity'],
+    prices: [{ label: 'EN', value: '~70 zł' }]
+  },
+  {
+    id: 'hall-crystal',
+    author: 'Judy Hall',
+    titleEn: 'The Crystal Bible',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Crystal Bible Judy Hall',
+    platforms: ['empik','bookcity'],
+    prices: [{ label: 'EN w PL', value: '89 zł' }],
+    note: 'Tylko wydanie angielskie — dostępne w Empiku i Bookcity.'
+  },
+  {
+    id: 'hawkes-cell',
+    author: 'Joyce Whitely Hawkes',
+    titleEn: 'Cell-Level Healing',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Cell-Level Healing Joyce Hawkes',
+    platforms: ['amazonpl']
+  },
+  {
+    id: 'hounsome-meditation',
+    author: 'Steve Hounsome',
+    titleEn: 'Practical Meditation',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Practical Meditation Steve Hounsome',
+    platforms: ['amazonpl']
+  },
+  {
+    id: 'masters-bypassing',
+    author: 'Robert Augustus Masters',
+    titleEn: 'Spiritual Bypassing',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Spiritual Bypassing Robert Augustus Masters',
+    platforms: ['amazonpl'],
+    prices: [{ label: 'EN', value: '~85 zł' }]
+  },
+  {
+    id: 'meader-shine',
+    author: 'William Meader',
+    titleEn: "Shine Forth – The Soul's Magical Destiny",
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Shine Forth William Meader',
+    platforms: ['amazonpl']
+  },
+  {
+    id: 'modi-healings',
+    author: 'Shakuntala Modi',
+    titleEn: 'Remarkable Healings',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Remarkable Healings Shakuntala Modi',
+    platforms: ['amazonpl'],
+    prices: [{ label: 'EN', value: '~100 zł' }]
+  },
+  {
+    id: 'montanaro-wisdom',
+    author: 'Claire Montanaro',
+    titleEn: 'Spiritual Wisdom',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Spiritual Wisdom Claire Montanaro',
+    platforms: ['amazonpl']
+  },
+  {
+    id: 'nelson-split',
+    author: 'John E. Nelson',
+    titleEn: 'Healing the Split',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Healing the Split John Nelson',
+    platforms: ['amazonpl'],
+    prices: [{ label: 'EN', value: '~110 zł' }]
+  },
+  {
+    id: 'southgate-chakra',
+    author: 'Natalie Southgate',
+    titleEn: 'Chakra Dance',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Chakra Dance Natalie Southgate',
+    platforms: ['amazonpl']
+  },
+  {
+    id: 'thomas-body',
+    author: 'Chris Thomas & Diane Baker',
+    titleEn: 'Everything You Always Wanted to Know About Your Body…',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Everything You Always Wanted Know Body Thomas Baker',
+    platforms: ['amazonpl']
+  },
+  {
+    id: 'hagens-anatomy',
+    author: 'Dr. Gunther Von Hagens',
+    titleEn: 'Anatomy for Beginners – DVD (2005)',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'Anatomy for Beginners Von Hagens DVD',
+    note: 'DVD z 2005 r. — poza rynkiem polskim.'
+  },
+  {
+    id: 'bullen-other',
+    author: 'Sarah Bullen',
+    titleEn: 'The Other Side',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'The Other Side Sarah Bullen',
+    platforms: ['amazonpl']
+  },
+  {
+    id: 'tolle-earth',
+    author: 'Eckhart Tolle',
+    titleEn: 'A New Earth',
+    titlePl: null,
+    status: 'not',
+    searchQuery: 'A New Earth Eckhart Tolle',
+    note: 'Uwaga — to bonus: Tolle ma też „Nową Ziemię" po polsku na Legimi (inny tytuł, nieobecny na liście iSIH).'
+  }
+];
+
+// =================== PLATFORMS ===================
+const platformMeta = {
+  legimi: { name: 'Legimi', color: '#0c5fe3', searchUrl: (q) => `https://www.legimi.pl/ebooki-szukaj/?searchString=${encodeURIComponent(q)}` },
+  empik: { name: 'Empik', color: '#e11837', searchUrl: (q) => `https://www.empik.com/szukaj/produkt?q=${encodeURIComponent(q)}` },
+  taniaksiazka: { name: 'TaniaKsiazka', color: '#f39200', searchUrl: (q) => `https://www.taniaksiazka.pl/Szukaj/q-${encodeURIComponent(q)}` },
+  znak: { name: 'Znak', color: '#222', searchUrl: (q) => `https://www.znak.com.pl/szukaj?q=${encodeURIComponent(q)}` },
+  ebookpoint: { name: 'Ebookpoint', color: '#0066cc', searchUrl: (q) => `https://ebookpoint.pl/search/?sq=1&stext=${encodeURIComponent(q)}` },
+  woblink: { name: 'Woblink', color: '#1a7a3f', searchUrl: (q) => `https://woblink.com/szukaj?query=${encodeURIComponent(q)}` },
+  tezeusz: { name: 'Tezeusz', color: '#8b5cf6', searchUrl: (q) => `https://tezeusz.pl/search?query=${encodeURIComponent(q)}` },
+  relaksacyjna: { name: 'Relaksacyjna', color: '#7a3b8e', searchUrl: (q) => `https://relaksacyjna.pl/search?controller=search&s=${encodeURIComponent(q)}` },
+  medium: { name: 'Medium', color: '#333', searchUrl: (q) => `https://www.medium.com.pl/szukaj.htm?co=${encodeURIComponent(q)}` },
+  pwn: { name: 'Księgarnia PWN', color: '#cc0000', searchUrl: (q) => `https://ksiegarnia.pwn.pl/szukaj/${encodeURIComponent(q)}.html` },
+  amazonpl: { name: 'Amazon.pl', color: '#ff9900', searchUrl: (q) => `https://www.amazon.pl/s?k=${encodeURIComponent(q)}` },
+  bookcity: { name: 'Bookcity', color: '#1a3d7c', searchUrl: (q) => `https://www.bookcity.pl/szukaj/${encodeURIComponent(q)}` },
+  sensus: { name: 'Sensus', color: '#e85d2d', searchUrl: (q) => `https://sensus.pl/search/?sq=1&stext=${encodeURIComponent(q)}` },
+  virtualo: { name: 'Virtualo', color: '#0095d5', searchUrl: (q) => `https://virtualo.pl/szukaj/?sfraza=${encodeURIComponent(q)}` },
+  ceneo: { name: 'Ceneo', color: '#f2a900', searchUrl: (q) => `https://www.ceneo.pl/;szukaj-${encodeURIComponent(q)}` },
+  swiatksiazki: { name: 'Świat Książki', color: '#c8102e', searchUrl: (q) => `https://www.swiatksiazki.pl/catalogsearch/result/?q=${encodeURIComponent(q)}` },
+  bonito: { name: 'Bonito', color: '#009345', searchUrl: (q) => `https://bonito.pl/szukaj/${encodeURIComponent(q)}` },
+  nakanapie: { name: 'Nakanapie', color: '#e63946', searchUrl: (q) => `https://nakanapie.pl/szukaj?q=${encodeURIComponent(q)}` },
+  amber: { name: 'Amber', color: '#d4a017', searchUrl: (q) => `https://www.wydawnictwoamber.pl/search?search_query=${encodeURIComponent(q)}` }
+};
+
+// =================== COVER FETCHING ===================
+const coverCache = new Map();
+
+async function fetchCover(book) {
+  if (coverCache.has(book.id)) return coverCache.get(book.id);
+
+  // For translated books, try Polish title + author. For others, use search query.
+  const query = book.searchQuery || `${book.titlePl || book.titleEn} ${book.author}`;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=3`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('API error');
+    const data = await response.json();
+
+    if (data.items && data.items.length > 0) {
+      // Prefer one with an image
+      for (const item of data.items) {
+        const info = item.volumeInfo;
+        if (info.imageLinks) {
+          // Upgrade to higher-res if possible
+          let cover = info.imageLinks.thumbnail || info.imageLinks.smallThumbnail;
+          if (cover) {
+            cover = cover.replace('http://', 'https://').replace('&edge=curl', '').replace('zoom=1', 'zoom=2');
+            coverCache.set(book.id, cover);
+            return cover;
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Cover fetch failed for', book.id, e);
+  }
+
+  coverCache.set(book.id, null);
+  return null;
+}
+
+async function loadCover(cardEl, book) {
+  const coverDiv = cardEl.querySelector('.cover');
+  const cover = await fetchCover(book);
+
+  if (cover) {
+    const img = new Image();
+    img.className = 'cover-img';
+    img.alt = `Okładka: ${book.titlePl || book.titleEn}`;
+    img.onload = () => {
+      const placeholder = coverDiv.querySelector('.cover-placeholder, .cover-loading');
+      if (placeholder) placeholder.remove();
+      coverDiv.appendChild(img);
+    };
+    img.onerror = () => {
+      const loading = coverDiv.querySelector('.cover-loading');
+      if (loading) loading.outerHTML = placeholderHtml(book);
+    };
+    img.src = cover;
+  } else {
+    const loading = coverDiv.querySelector('.cover-loading');
+    if (loading) loading.outerHTML = placeholderHtml(book);
+  }
+}
+
+function placeholderHtml(book) {
+  return `<div class="cover-placeholder">
+    <div class="cover-ph-author">${book.author}</div>
+    <div class="cover-ph-title">${book.titlePl || book.titleEn}</div>
+  </div>`;
+}
+
+// =================== RENDERING ===================
+const sectionsRoot = document.getElementById('sections');
+
+function render(filter = 'all', search = '', platformFilter = null) {
+  const s = search.toLowerCase().trim();
+
+  const groups = { translated: [], uncertain: [], not: [] };
+
+  books.forEach(book => {
+    // search
+    const matchesSearch = !s ||
+      book.author.toLowerCase().includes(s) ||
+      book.titleEn.toLowerCase().includes(s) ||
+      (book.titlePl && book.titlePl.toLowerCase().includes(s));
+
+    // status filter
+    let matchesFilter = true;
+    if (filter !== 'all') matchesFilter = book.status === filter;
+
+    // platform filter
+    let matchesPlatform = true;
+    if (platformFilter) {
+      if (platformFilter === 'legimi' || platformFilter === 'empik') {
+        matchesPlatform = book.platforms && book.platforms.includes(platformFilter);
+      } else if (platformFilter === 'ebook') {
+        matchesPlatform = book.prices && book.prices.some(p => /ebook/i.test(p.label));
+      } else if (platformFilter === 'audiobook') {
+        matchesPlatform = book.prices && book.prices.some(p => /audiobook/i.test(p.label));
+      }
+    }
+
+    if (matchesSearch && matchesFilter && matchesPlatform) {
+      groups[book.status].push(book);
+    }
+  });
+
+  sectionsRoot.innerHTML = '';
+  const sectionConfigs = [
+    { key: 'translated', title: 'Po polsku', emLabel: 'potwierdzone', emColor: 'var(--accent)' },
+    { key: 'uncertain', title: 'Do weryfikacji', emLabel: 'niepewne', emColor: 'var(--amber)' },
+    { key: 'not', title: 'Tylko po angielsku', emLabel: 'brak tłumaczenia', emColor: 'var(--coral)' }
+  ];
+
+  let totalShown = 0;
+  sectionConfigs.forEach(cfg => {
+    const list = groups[cfg.key];
+    if (list.length === 0) return;
+    totalShown += list.length;
+
+    const section = document.createElement('section');
+    section.className = `section ${cfg.key}`;
+
+    section.innerHTML = `
+      <div class="section-head">
+        <h2 class="section-title">${cfg.title.split(' ')[0]} <em>${cfg.title.split(' ').slice(1).join(' ') || cfg.emLabel}</em></h2>
+        <div class="section-count">${list.length} ${list.length === 1 ? 'POZYCJA' : list.length < 5 ? 'POZYCJE' : 'POZYCJI'}</div>
+      </div>
+      <div class="grid"></div>
+    `;
+
+    const grid = section.querySelector('.grid');
+    list.forEach((book, idx) => {
+      const card = createCard(book, idx);
+      grid.appendChild(card);
+      // Lazy load cover after card is in DOM
+      requestIdleCallback ? requestIdleCallback(() => loadCover(card, book)) : setTimeout(() => loadCover(card, book), 50 * idx);
+    });
+
+    sectionsRoot.appendChild(section);
+  });
+
+  if (totalShown === 0) {
+    sectionsRoot.innerHTML = `
+      <div class="empty">Nic nie znaleziono — spróbuj innej frazy lub zmień filtr.</div>
+    `;
+  }
+}
+
+function createCard(book, idx) {
+  const card = document.createElement('article');
+  card.className = `book ${!book.titlePl ? 'not-translated' : ''}`;
+  card.style.animationDelay = `${Math.min(idx * 30, 400)}ms`;
+  card.dataset.bookId = book.id;
+
+  const statusLabel = { translated: 'PL', uncertain: '?', not: 'EN' }[book.status];
+
+  const mainPrice = book.prices && book.prices[0] ? book.prices[0] : null;
+  const platformDots = (book.platforms || []).slice(0, 4).map(p => {
+    const cls = p === 'legimi' ? 'pd-legimi' : p === 'empik' ? 'pd-empik' : 'pd-default';
+    return `<span class="platform-dot ${cls}" title="${platformMeta[p]?.name || p}"></span>`;
+  }).join('');
+
+  card.innerHTML = `
+    <div class="cover">
+      <span class="status-chip ${book.status}">${statusLabel}</span>
+      <div class="cover-loading"></div>
+    </div>
+    <div class="book-body">
+      <div class="book-author">${book.author}</div>
+      <div class="book-title">${book.titlePl || '— brak polskiego wydania —'}</div>
+      ${book.titlePl ? `<div class="book-subtitle">${book.titleEn}</div>` : `<div class="book-subtitle">${book.titleEn}</div>`}
+      <div class="book-meta">
+        ${mainPrice ? `<div class="book-price"><span class="book-price-label">${mainPrice.label}</span>${mainPrice.value}</div>` : '<div class="book-price book-price-label" style="color:var(--ink-4)">bez danych</div>'}
+        ${platformDots ? `<div class="platform-dots">${platformDots}</div>` : ''}
+      </div>
+    </div>
+  `;
+
+  card.addEventListener('click', () => openModal(book));
+  return card;
+}
+
+// =================== MODAL ===================
+const modalBackdrop = document.getElementById('modal-backdrop');
+const modalContent = document.getElementById('modal-content');
+const modalClose = document.getElementById('modal-close');
+
+async function openModal(book) {
+  const statusLabel = { translated: 'Dostępne po polsku', uncertain: 'Niepotwierdzone', not: 'Tylko po angielsku' }[book.status];
+
+  const cover = await fetchCover(book);
+
+  const platforms = (book.platforms || []).map(p => {
+    const meta = platformMeta[p];
+    if (!meta) return '';
+    const query = book.titlePl || book.titleEn;
+    return `<a href="${meta.searchUrl(query + ' ' + book.author)}" target="_blank" rel="noopener" class="buy-link">
+      <span class="buy-link-name"><span class="buy-dot" style="background:${meta.color}"></span>${meta.name}</span>
+      <span class="buy-arrow">↗</span>
+    </a>`;
+  }).join('');
+
+  const prices = (book.prices || []).map(p => `
+    <div class="modal-price">
+      <div class="modal-price-label">${p.label}</div>
+      <div class="modal-price-value">${p.value}</div>
+    </div>
+  `).join('');
+
+  modalContent.innerHTML = `
+    <div class="modal-header">
+      <div class="modal-cover">
+        ${cover ? `<img src="${cover}" alt="Okładka: ${book.titlePl || book.titleEn}" />` : `
+          <div class="cover-placeholder" style="position:relative; inset:auto; aspect-ratio:3/4;">
+            <div class="cover-ph-author">${book.author}</div>
+            <div class="cover-ph-title">${book.titlePl || book.titleEn}</div>
+          </div>
+        `}
+      </div>
+      <div class="modal-info">
+        <div class="modal-author">${book.author}</div>
+        <h2 class="modal-title">${book.titlePl || book.titleEn}</h2>
+        ${book.titlePl ? `<div class="modal-subtitle">oryg.: ${book.titleEn}</div>` : ''}
+        <div class="modal-status-row">
+          <span class="chip chip-${book.status}">${statusLabel}</span>
+          ${book.publisher ? `<span class="chip chip-publisher">${book.publisher}${book.year ? ', ' + book.year : ''}</span>` : ''}
+        </div>
+        ${book.note ? `<div class="modal-note">${book.note}</div>` : ''}
+      </div>
+    </div>
+    <div class="modal-body">
+      ${prices ? `
+        <div class="modal-section">
+          <div class="modal-section-title">Ceny</div>
+          <div class="modal-prices">${prices}</div>
+        </div>
+      ` : ''}
+      ${platforms ? `
+        <div class="modal-section">
+          <div class="modal-section-title">Gdzie kupić / wypożyczyć</div>
+          <div class="buy-links">${platforms}</div>
+        </div>
+      ` : ''}
+      ${!platforms && !prices ? `
+        <div class="modal-section">
+          <div class="modal-note" style="border-color:var(--amber)">
+            Ta pozycja nie ma potwierdzonej dostępności. Spróbuj bezpośrednio w:
+            <a href="${platformMeta.bookcity.searchUrl(book.titleEn + ' ' + book.author)}" target="_blank" style="color:var(--accent)">Bookcity</a>,
+            <a href="${platformMeta.amazonpl.searchUrl(book.titleEn + ' ' + book.author)}" target="_blank" style="color:var(--accent)">Amazon.pl</a>
+            lub <a href="${platformMeta.empik.searchUrl(book.titleEn + ' ' + book.author)}" target="_blank" style="color:var(--accent)">Empik</a>.
+          </div>
+        </div>
+      ` : ''}
+    </div>
+  `;
+
+  modalBackdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modalBackdrop.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modalBackdrop.addEventListener('click', (e) => {
+  if (e.target === modalBackdrop) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal();
+});
+
+// =================== FILTERS ===================
+let state = { filter: 'all', search: '', platform: null };
+
+function updateFilters() {
+  // sync filter buttons
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.filter === state.filter);
+  });
+  // sync stat cards
+  document.querySelectorAll('.stat').forEach(s => {
+    s.classList.toggle('active', s.dataset.filter === state.filter);
+  });
+  // sync platform pills
+  document.querySelectorAll('.platform-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.platform === state.platform);
+  });
+  render(state.filter, state.search, state.platform);
+}
+
+document.querySelectorAll('.filter-btn, .stat').forEach(el => {
+  el.addEventListener('click', () => {
+    state.filter = el.dataset.filter;
+    updateFilters();
+  });
+});
+
+document.querySelectorAll('.platform-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    state.platform = state.platform === pill.dataset.platform ? null : pill.dataset.platform;
+    updateFilters();
+  });
+});
+
+const searchInput = document.getElementById('search');
+const searchClear = document.getElementById('search-clear');
+let searchTimer;
+
+searchInput.addEventListener('input', (e) => {
+  clearTimeout(searchTimer);
+  searchClear.classList.toggle('visible', e.target.value.length > 0);
+  searchTimer = setTimeout(() => {
+    state.search = e.target.value;
+    updateFilters();
+  }, 150);
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  state.search = '';
+  searchClear.classList.remove('visible');
+  searchInput.focus();
+  updateFilters();
+});
+
+// =================== INIT ===================
+render();
+</script>
+
+</body>
+</html>
